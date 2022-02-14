@@ -4,14 +4,29 @@ import PageHeader from "../components/PageHeader";
 import PrimaryButton from "../components/PrimaryButton";
 import SplashScreenBackground from "../components/SplashScreenBackground";
 import { useForm } from "react-hook-form";
-import { colors, fontSize, spacing } from "../style/style";
+import { colors, fontSize } from "../style/style";
 import ErrorMessage from "../components/ErrorMessage";
+import axios from 'axios';
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
+    const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (userLogin) => {
+        (async () => {
+            try {
+                const { data: user } = await axios.post("http://localhost:4000/auth/token", userLogin)
+                user && setUser(user);
+                setTimeout(navigate("/"), 500)
+            } catch (err) {
+
+            }
+        })()
+    }
 
     // === STYLE ===
     const backgroundLayer = css`
