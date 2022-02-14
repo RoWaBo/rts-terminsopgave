@@ -11,8 +11,8 @@ import SplashScreen from "./components/SplashScreen";
 function App() {
   const { pathname } = useLocation();
 
-  const [showSplashScreen, setshowSplashScreen] = useState(true);
-
+  const [hideSplashScreen, setHideSplashScreen] = useState(sessionStorage.getItem('hideSplashScreen'));
+  console.log(hideSplashScreen);
   return (
     <MainLayout>
       <Routes>
@@ -21,10 +21,12 @@ function App() {
         <Route path="/soeg" element={<Search />}></Route>
         <Route path="/kalender" element={<Calendar />}></Route>
       </Routes>
-      {(pathname !== '/logind' && !showSplashScreen) && (
+      {(pathname !== '/logind' && hideSplashScreen) && (
         <Navigation />
       )}
-      {showSplashScreen && <SplashScreen />}
+      {!hideSplashScreen && (
+        <SplashScreen setHideSplashScreen={setHideSplashScreen} />
+      )}
     </MainLayout>
   );
 }
