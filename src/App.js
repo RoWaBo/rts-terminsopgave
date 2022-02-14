@@ -4,12 +4,13 @@ import Calendar from './pages/Calendar'
 import Search from './pages/Search'
 import Login from "./pages/Login";
 import Navigation from "./components/Navigation";
+import MainLayout from "./components/MainLayout";
 
 function App() {
   const { pathname } = useLocation();
 
   return (
-    <>
+    <MainLayout>
       <Routes>
         <Route path="/" element={<Activities />}></Route>
         <Route path="/soeg" element={<Search />}></Route>
@@ -18,7 +19,7 @@ function App() {
       {pathname !== '/logind' && (
         <Navigation />
       )}
-    </>
+    </MainLayout>
   );
 }
 

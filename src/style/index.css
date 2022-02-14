@@ -17,9 +17,6 @@ code {
 }
 
 /* === Boilerplate === */
-#root {
-  overflow-x: hidden;
-}
 * {
   margin: 0;
   padding: 0;
