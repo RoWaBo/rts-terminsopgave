@@ -14,6 +14,7 @@ export const fontSize = {
 }
 
 export const spacing = {
+    gutter: '28px',
     s: '.5rem',
     m: '1rem',
     l: '1.5rem',
@@ -22,7 +23,8 @@ export const spacing = {
 }
 
 export const shadow = {
-    one: '3px 4px 4px rgba(0, 0, 0, 0.25)'
+    one: '3px 4px 4px rgba(0, 0, 0, 0.25)',
+    two: '0px -3px 4px rgba(0, 0, 0, 0.25)'
 }
 
 export const borderRadius = {
