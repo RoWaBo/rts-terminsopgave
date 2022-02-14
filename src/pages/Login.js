@@ -4,7 +4,8 @@ import PageHeader from "../components/PageHeader";
 import PrimaryButton from "../components/PrimaryButton";
 import SplashScreenBackground from "../components/SplashScreenBackground";
 import { useForm } from "react-hook-form";
-import { spacing } from "../style/style";
+import { colors, fontSize, spacing } from "../style/style";
+import ErrorMessage from "../components/ErrorMessage";
 
 const Login = () => {
 
@@ -29,34 +30,62 @@ const Login = () => {
         height: 100vh;
         display: grid;
         place-content: center;
-        padding: 0 12vw;
     `
     const pageHeaderStyle = css`
         padding: 0;
+    `
+    const inputStyle = css`
+        width: 100%;
+        height: 50px;
+        background-color: ${colors.grey};
+        padding: 0 22px;
+        border: none;
+        margin-bottom: 15px;
+
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: normal;
+        font-size: ${fontSize.s};
+    `
+    const btnStyle = css`
+        display: grid;
+        margin: 15px auto;
+    `
+    const formStyle = css`
+        width: 332px;
     `
 
     return (
         <SplashScreenBackground>
             <div css={containerStyle}>
                 <PageHeader heading="log ind" css={pageHeaderStyle} />
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)} css={formStyle}>
+                    {errors.username && (
+                        <ErrorMessage message={errors.username.message} />
+                    )}
                     <input
+                        css={inputStyle}
                         type="text"
-                        placeholder="brugernavn"
+                        placeholder={'brugernavn'}
                         {...register("username", {
                             required: "Skriv et gyldigt brugernavn"
                         })}
                     />
+                    {errors.password && (
+                        <ErrorMessage message={errors.password.message} />
+                    )}
                     <input
+                        css={inputStyle}
                         type="password"
                         placeholder="adgangskode"
                         {...register("password", {
                             required: "Skriv en gyldig adgangskode",
                         })}
                     />
-                    {errors.username && errors.username.message}
-                    {errors.password && errors.password.message}
-                    <PrimaryButton text="Log ind" type="submit" />
+                    <PrimaryButton
+                        css={btnStyle}
+                        text="Log ind"
+                        type="submit"
+                    />
                 </form>
             </div>
             <div css={backgroundLayer}></div>
