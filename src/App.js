@@ -11,9 +11,8 @@ import { AnimatePresence } from 'framer-motion'
 
 function App() {
   const { pathname } = useLocation();
-
   const [hideSplashScreen, setHideSplashScreen] = useState(sessionStorage.getItem('hideSplashScreen'));
-  console.log(hideSplashScreen);
+
   return (
     <MainLayout>
       <Routes>
