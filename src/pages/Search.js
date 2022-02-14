@@ -1,6 +1,12 @@
+import PageHeader from "../components/PageHeader";
+import { css } from "@emotion/react";
+/** @jsxImportSource @emotion/react */
+
 const Search = () => {
     return (
-        <><h1>search</h1></>
+        <>
+            <PageHeader heading="Søg" css={css`padding-bottom: 0;`} />
+        </>
     );
 }
 

@@ -1,6 +1,10 @@
+import PageHeader from "../components/PageHeader";
+
 const Activities = () => {
     return (
-        <><h1>activities</h1></>
+        <>
+            <PageHeader heading="aktiviteter" />
+        </>
     );
 }
 

@@ -1,6 +1,10 @@
+import PageHeader from "../components/PageHeader";
+
 const Calendar = () => {
     return (
-        <><h1>calendar</h1></>
+        <>
+            <PageHeader heading="kalender" />
+        </>
     );
 }
 
