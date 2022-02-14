@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
+import { motion } from 'framer-motion'
 
 const SplashScreenBackground = ({ children }) => {
 
@@ -17,9 +18,14 @@ const SplashScreenBackground = ({ children }) => {
     `
 
     return (
-        <div css={containerStyle}>
+        <motion.div
+            css={containerStyle}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.2 }}
+        >
             {children}
-        </div>
+        </motion.div>
     );
 }
 
