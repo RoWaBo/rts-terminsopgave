@@ -10,6 +10,7 @@ const PrimaryButton = ({ text, ...props }) => {
         border-radius: ${borderRadius.s};
         background: ${colors.purple};
         box-shadow: ${shadow.one};
+        border: none;
 
         color: ${colors.grey};
         font-size: ${fontSize.s};
