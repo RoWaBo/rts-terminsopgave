@@ -20,9 +20,14 @@ const SplashScreenBackground = ({ children }) => {
     return (
         <motion.div
             css={containerStyle}
+            key='splashScreen'
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.2 }}
+            exit={{
+                y: '100vh',
+                transition: { duration: .5 }
+            }}
         >
             {children}
         </motion.div>

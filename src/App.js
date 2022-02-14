@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import MainLayout from "./components/MainLayout";
 import { useState } from "react";
 import SplashScreen from "./components/SplashScreen";
+import { AnimatePresence } from 'framer-motion'
 
 function App() {
   const { pathname } = useLocation();
@@ -24,9 +25,11 @@ function App() {
       {(pathname !== '/logind' && hideSplashScreen) && (
         <Navigation />
       )}
-      {!hideSplashScreen && (
-        <SplashScreen setHideSplashScreen={setHideSplashScreen} />
-      )}
+      <AnimatePresence>
+        {!hideSplashScreen && (
+          <SplashScreen setHideSplashScreen={setHideSplashScreen} />
+        )}
+      </AnimatePresence>
     </MainLayout>
   );
 }
