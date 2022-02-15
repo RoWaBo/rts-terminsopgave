@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { colors, fontSize } from "../style/style";
 import ErrorMessage from "../components/ErrorMessage";
 import axios from 'axios';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,7 @@ const Login = () => {
     const navigate = useNavigate();
     const { setAuth } = useContext(UserContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [loginErrorMessage, setloginErrorMessage] = useState();
 
     const onSubmit = (userLogin) => {
         (async () => {
@@ -25,8 +26,8 @@ const Login = () => {
                     userID: auth.userId
                 });
                 setTimeout(navigate("/"), 500)
-            } catch (err) {
-
+            } catch {
+                setloginErrorMessage('Brugernavn eller adgangskode er forkert')
             }
         })()
     }
@@ -77,9 +78,6 @@ const Login = () => {
             <div css={containerStyle}>
                 <PageHeader heading="log ind" css={pageHeaderStyle} />
                 <form onSubmit={handleSubmit(onSubmit)} css={formStyle}>
-                    {errors.username && (
-                        <ErrorMessage message={errors.username.message} />
-                    )}
                     <input
                         css={inputStyle}
                         type="text"
@@ -88,9 +86,6 @@ const Login = () => {
                             required: "Skriv et gyldigt brugernavn"
                         })}
                     />
-                    {errors.password && (
-                        <ErrorMessage message={errors.password.message} />
-                    )}
                     <input
                         css={inputStyle}
                         type="password"
@@ -99,6 +94,12 @@ const Login = () => {
                             required: "Skriv en gyldig adgangskode",
                         })}
                     />
+                    {(errors.username || errors.password) && (
+                        <ErrorMessage message="Skriv venligst brugernavn og adgangskode" />
+                    )}
+                    {loginErrorMessage && (
+                        <ErrorMessage message={loginErrorMessage} />
+                    )}
                     <PrimaryButton
                         css={btnStyle}
                         text="Log ind"
