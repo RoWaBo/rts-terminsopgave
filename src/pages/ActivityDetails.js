@@ -12,7 +12,7 @@ const ActivityDetails = () => {
     const { id } = useParams()
     const { user, addUserToActivity, removeUserFromActivity } = useContext(UserContext)
     const [activity, setActivity] = useState();
-    const [isSubscribed, setIsSubscribed] = useState(null);
+    const [isSubscribed, setIsSubscribed] = useState();
     const [userActivities, setUserActivities] = useState();
     const [errorMessage, setErrorMessage] = useState();
 
@@ -40,11 +40,11 @@ const ActivityDetails = () => {
         }
     }, [userActivities, activity]);
 
+    // Handle subscribe and unsubscribe on button click
     const getCurrentWeekday = () => {
         const date = new Date
         return date.toLocaleString('da-dk', { weekday: 'long' })
     }
-
     const handleClick = () => {
         if (user.age > activity.maxAge || user.age < activity.minAge) {
             setErrorMessage('Din alder matcher ikke aktiviteten')
