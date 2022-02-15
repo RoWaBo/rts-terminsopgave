@@ -14,7 +14,6 @@ const UserProvider = ({ children }) => {
 
     useEffect(() => {
         (async () => {
-
             !auth.token && navigate('/logind')
 
             // set Auth session storage and get user

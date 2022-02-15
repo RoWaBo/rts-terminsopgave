@@ -5,11 +5,9 @@ import Search from './pages/Search'
 import Login from "./pages/Login";
 import ActivityDetails from "./pages/ActivityDetails";
 import Navigation from "./components/Navigation";
-import MainLayout from "./components/MainLayout";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import SplashScreen from "./components/SplashScreen";
 import { AnimatePresence } from 'framer-motion'
-import { UserContext } from "./contexts/UserContext";
 
 function App() {
   const { pathname } = useLocation();
