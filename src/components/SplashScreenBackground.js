@@ -12,6 +12,7 @@ const SplashScreenBackground = ({ children }) => {
     bottom: 0;
     width: 100%;
     height: 100%;
+    z-index: 10;
     background-image: url('./assets/splashscreenbackground.png');
     background-repeat: no-repeat;
     background-size: cover;
