@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { css } from "@emotion/react";
 import PrimaryButton from "../components/PrimaryButton";
-import { colors, fontSize, spacing } from "../style/style";
+import { colors, spacing } from "../style/style";
 import { UserContext } from "../contexts/UserContext";
 /** @jsxImportSource @emotion/react */
 
@@ -42,7 +42,7 @@ const ActivityDetails = () => {
 
     // Handle subscribe and unsubscribe on button click
     const getCurrentWeekday = () => {
-        const date = new Date
+        const date = new Date()
         return date.toLocaleString('da-dk', { weekday: 'long' })
     }
     const handleClick = () => {

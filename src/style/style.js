@@ -1,5 +1,6 @@
 export const colors = {
     grey: '#EAEAEA',
+    greyTrans: 'rgba(196, 196, 196, 0.3)',
     purple: '#5E2E53',
     purpleLight: '#913693',
     pink: '#E1A1E9',
