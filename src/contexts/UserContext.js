@@ -10,9 +10,9 @@ const UserProvider = ({ children }) => {
         userID: sessionStorage.getItem('userID')
     });
 
+    // set Auth session storage and get user
     useEffect(() => {
         (async () => {
-            // set Auth session storage and get user
             if (!user && auth.token) {
                 sessionStorage.setItem('token', auth.token)
                 sessionStorage.setItem('userID', auth.userID)
@@ -26,19 +26,20 @@ const UserProvider = ({ children }) => {
         })()
     }, [auth, user]);
 
+    const updateUser = async () => {
+        const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
+            headers: { 'Authorization': `Bearer ${auth.token}` }
+        })
+        setUser({ ...updatedUser })
+    }
+
     const addUserToActivity = async (activityID) => {
         console.log('addUserToActivity');
 
         await axios.post(`http://localhost:4000/api/v1/users/${user.id}/activities/${activityID}`, {}, {
             headers: { 'Authorization': `Bearer ${auth.token}` }
         })
-
-        const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
-            headers: { 'Authorization': `Bearer ${auth.token}` }
-        })
-        setUser({ ...updatedUser })
-        // console.log('userAPI, :', updatedUser);
-        // console.log('userState, :', user);
+        updateUser()
     }
 
     const removeUserFromActivity = async (activityID) => {
@@ -47,14 +48,9 @@ const UserProvider = ({ children }) => {
         await axios.delete(`http://localhost:4000/api/v1/users/${user.id}/activities/${activityID}`, {
             headers: { 'Authorization': `Bearer ${auth.token}` }
         })
-
-        const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
-            headers: { 'Authorization': `Bearer ${auth.token}` }
-        })
-        setUser({ ...updatedUser })
-        // console.log('userAPI, :', updatedUser);
-        // console.log('userState, :', user);
+        updateUser()
     }
+
 
     return (
         <UserContext.Provider value={{ user, setUser, auth, setAuth, addUserToActivity, removeUserFromActivity }}>

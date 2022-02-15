@@ -44,16 +44,8 @@ const ActivityDetails = () => {
             return
         }
 
-        if (!isSubscribed) {
-            addUserToActivity(activity.id)
-            // setUserActivities([activity, ...userActivities])
-        }
-
-        if (isSubscribed) {
-            removeUserFromActivity(activity.id)
-            // const updatedUserActivities = userActivities.filter(userActivity => userActivity.id === activity.id && false)
-            // setUserActivities([...updatedUserActivities])
-        }
+        !isSubscribed && addUserToActivity(activity.id)
+        isSubscribed && removeUserFromActivity(activity.id)
 
         setIsSubscribed(!isSubscribed)
     }
