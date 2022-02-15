@@ -24,16 +24,12 @@ const ActivityCard = ({ heading, age, imgUrl }) => {
         font-size: ${fontSize.s};
         font-weight: 500;
     `
-    const subHeadingStyle = css`
-        font-size: ${fontSize.s};
-        font-weight: 500;
-    `
 
     return (
         <section css={sectionStyle}>
             <div css={overlayStyle}>
                 <h2 css={headingStyle}>{heading}</h2>
-                <h3 css={subHeadingStyle}>{`${age.min}-${age.max} år`}</h3>
+                <h3 css={headingStyle}>{`${age.min}-${age.max} år`}</h3>
             </div>
         </section>
     );
