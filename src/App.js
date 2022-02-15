@@ -3,6 +3,7 @@ import Activities from './pages/Activities'
 import Calendar from './pages/Calendar'
 import Search from './pages/Search'
 import Login from "./pages/Login";
+import ActivityDetails from "./pages/ActivityDetails";
 import Navigation from "./components/Navigation";
 import MainLayout from "./components/MainLayout";
 import { useContext, useEffect, useState } from "react";
@@ -18,6 +19,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Activities />}></Route>
+        <Route path="/aktivitetsdetaljer/:id" element={<ActivityDetails />}></Route>
         <Route path="/logind" element={<Login />}></Route>
         <Route path="/soeg" element={<Search />}></Route>
         <Route path="/kalender" element={<Calendar />}></Route>
