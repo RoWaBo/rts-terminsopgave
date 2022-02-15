@@ -1,15 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { css } from "@emotion/react";
 import PrimaryButton from "../components/PrimaryButton";
 import { colors, spacing } from "../style/style";
+import { UserContext } from "../contexts/UserContext";
 /** @jsxImportSource @emotion/react */
 
 const ActivityDetails = () => {
     const { id } = useParams()
-
+    const { user } = useContext(UserContext)
     const [activity, setActivity] = useState();
 
     useEffect(() => {
@@ -51,11 +52,13 @@ const ActivityDetails = () => {
             {activity && (
                 <article>
                     <div css={imgStyle}>
-                        <PrimaryButton
-                            text={"Tilmeld"}
-                            css={btnStyle}
-                            onClick={handleClick}
-                        />
+                        {user && (
+                            <PrimaryButton
+                                text={"Tilmeld"}
+                                css={btnStyle}
+                                onClick={handleClick}
+                            />
+                        )}
                     </div>
                     <div css={textContainerStyle}>
                         <h2>{activity.name}</h2>
