@@ -28,8 +28,9 @@ const Login = () => {
                     token: auth.token,
                     userID: auth.userId
                 });
-                setTimeout(navigate("/"), 500)
+                navigate("/")
             } catch {
+                setIsLoading(false)
                 setloginErrorMessage('Brugernavn eller adgangskode er forkert')
             }
         })()
