@@ -2,10 +2,17 @@ import { css } from "@emotion/react";
 import { colors, fontSize, spacing } from "../style/style";
 /** @jsxImportSource @emotion/react */
 
-const PageHeader = ({ heading, ...props }) => {
+const PageHeader = ({ heading, isFixed, ...props }) => {
 
     const headerStyle = css`
         padding: ${spacing.gutter};
+        ${isFixed && (`
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            width: 100vw;
+            background: ${colors.purple};
+        `)}
     `
     const headingStyle = css`
         font-size: ${fontSize.l};

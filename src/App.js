@@ -15,7 +15,7 @@ function App() {
   const [hideSplashScreen, setHideSplashScreen] = useState(sessionStorage.getItem('hideSplashScreen'));
 
   return (
-    <MainLayout>
+    <>
       <Routes>
         <Route path="/" element={<Activities />}></Route>
         <Route path="/logind" element={<Login />}></Route>
@@ -30,7 +30,7 @@ function App() {
           <SplashScreen setHideSplashScreen={setHideSplashScreen} />
         )}
       </AnimatePresence>
-    </MainLayout>
+    </>
   );
 }
 
