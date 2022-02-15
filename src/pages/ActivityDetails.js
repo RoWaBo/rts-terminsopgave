@@ -12,7 +12,7 @@ const ActivityDetails = () => {
     const { id } = useParams()
     const { user, addUserToActivity, removeUserFromActivity } = useContext(UserContext)
     const [activity, setActivity] = useState();
-    const [isSubscribed, setIsSubscribed] = useState();
+    const [isSubscribed, setIsSubscribed] = useState(null);
     const [userActivities, setUserActivities] = useState();
     const [errorMessage, setErrorMessage] = useState();
 
@@ -34,13 +34,25 @@ const ActivityDetails = () => {
     // Setting isSubscribed if user activity match current activity
     useEffect(() => {
         if (userActivities && activity) {
-            userActivities.map(userActivity => userActivity.id === activity.id && setIsSubscribed(true))
+            userActivities.forEach(userActivity => {
+                userActivity.id === activity.id && setIsSubscribed(true)
+            })
         }
     }, [userActivities, activity]);
+
+    const getCurrentWeekday = () => {
+        const date = new Date
+        return date.toLocaleString('da-dk', { weekday: 'long' })
+    }
 
     const handleClick = () => {
         if (user.age > activity.maxAge || user.age < activity.minAge) {
             setErrorMessage('Din alder matcher ikke aktiviteten')
+            return
+        }
+
+        if (getCurrentWeekday() === activity.weekday) {
+            setErrorMessage('Denne aktivitet afholdes nu og kan derfor ikke tilmeldes')
             return
         }
 
@@ -77,7 +89,7 @@ const ActivityDetails = () => {
             {activity && (
                 <article>
                     <div css={imgStyle}>
-                        {user && userActivities && (
+                        {userActivities && (
                             <PrimaryButton
                                 text={isSubscribed ? "Forlad" : "Tilmeld"}
                                 css={btnStyle}
