@@ -16,10 +16,13 @@ const Login = () => {
     const { setAuth } = useContext(UserContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loginErrorMessage, setloginErrorMessage] = useState();
+    const [isloading, setIsLoading] = useState(false);
 
     const onSubmit = (userLogin) => {
         (async () => {
             try {
+                setIsLoading(true)
+
                 const { data: auth } = await axios.post("http://localhost:4000/auth/token", userLogin)
                 setAuth({
                     token: auth.token,
@@ -76,36 +79,41 @@ const Login = () => {
     return (
         <SplashScreenBackground>
             <div css={containerStyle}>
-                <PageHeader heading="log ind" css={pageHeaderStyle} />
-                <form onSubmit={handleSubmit(onSubmit)} css={formStyle}>
-                    <input
-                        css={inputStyle}
-                        type="text"
-                        placeholder={'brugernavn'}
-                        {...register("username", {
-                            required: "Skriv et gyldigt brugernavn"
-                        })}
-                    />
-                    <input
-                        css={inputStyle}
-                        type="password"
-                        placeholder="adgangskode"
-                        {...register("password", {
-                            required: "Skriv en gyldig adgangskode",
-                        })}
-                    />
-                    {(errors.username || errors.password) && (
-                        <ErrorMessage message="Skriv venligst brugernavn og adgangskode" />
-                    )}
-                    {loginErrorMessage && (
-                        <ErrorMessage message={loginErrorMessage} />
-                    )}
-                    <PrimaryButton
-                        css={btnStyle}
-                        text="Log ind"
-                        type="submit"
-                    />
-                </form>
+                {!isloading && (<>
+                    <PageHeader heading="log ind" css={pageHeaderStyle} />
+                    <form onSubmit={handleSubmit(onSubmit)} css={formStyle}>
+                        <input
+                            css={inputStyle}
+                            type="text"
+                            placeholder={'brugernavn'}
+                            {...register("username", {
+                                required: "Skriv et gyldigt brugernavn"
+                            })}
+                        />
+                        <input
+                            css={inputStyle}
+                            type="password"
+                            placeholder="adgangskode"
+                            {...register("password", {
+                                required: "Skriv en gyldig adgangskode",
+                            })}
+                        />
+                        {(errors.username || errors.password) && (
+                            <ErrorMessage message="Skriv venligst brugernavn og adgangskode" />
+                        )}
+                        {loginErrorMessage && (
+                            <ErrorMessage message={loginErrorMessage} />
+                        )}
+                        <PrimaryButton
+                            css={btnStyle}
+                            text="Log ind"
+                            type="submit"
+                        />
+                    </form>
+                </>)}
+                {isloading && (
+                    <PageHeader heading="Logger ind..." />
+                )}
             </div>
             <div css={backgroundLayer}></div>
         </SplashScreenBackground>
