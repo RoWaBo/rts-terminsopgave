@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { css } from "@emotion/react";
 import PrimaryButton from "../components/PrimaryButton";
-import { colors, spacing } from "../style/style";
+import { colors, fontSize, spacing } from "../style/style";
 import { UserContext } from "../contexts/UserContext";
 /** @jsxImportSource @emotion/react */
 
@@ -83,6 +83,11 @@ const ActivityDetails = () => {
         padding-bottom: 10px;
         line-height: 10px;
     `
+    const errorMessagetyle = css`
+        padding: 3rem 0 0;
+        font-size: 20px;
+        text-align: center;
+    `
 
     return (
         <MainLayout>
@@ -102,7 +107,7 @@ const ActivityDetails = () => {
                         <h3 css={descriptionStyle}>{`${activity.minAge}-${activity.maxAge} år`}</h3>
                         <p>{activity.description}</p>
                         {errorMessage && (
-                            <p>{errorMessage}</p>
+                            <p css={errorMessagetyle}>{errorMessage}</p>
                         )}
                     </div>
                 </article>
