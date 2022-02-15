@@ -1,11 +1,9 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-    const navigate = useNavigate();
     const [user, setUser] = useState();
     const [auth, setAuth] = useState({
         token: sessionStorage.getItem('token'),
@@ -14,8 +12,6 @@ const UserProvider = ({ children }) => {
 
     useEffect(() => {
         (async () => {
-            !auth.token && navigate('/logind')
-
             // set Auth session storage and get user
             if (!user && auth.token) {
                 sessionStorage.setItem('token', auth.token)
@@ -28,7 +24,7 @@ const UserProvider = ({ children }) => {
                 setUser(user)
             }
         })()
-    }, [auth, user, navigate]);
+    }, [auth, user]);
 
     return (
         <UserContext.Provider value={{ user, setUser, auth, setAuth }}>

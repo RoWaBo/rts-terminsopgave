@@ -28,7 +28,7 @@ const Login = () => {
                     token: auth.token,
                     userID: auth.userId
                 });
-                navigate("/")
+                navigate("/kalender")
             } catch {
                 setIsLoading(false)
                 setloginErrorMessage('Brugernavn eller adgangskode er forkert')
