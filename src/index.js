@@ -8,11 +8,11 @@ import UserProvider from "./contexts/UserContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <UserProvider>
         <App />
-      </BrowserRouter>
-    </UserProvider>
+      </UserProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

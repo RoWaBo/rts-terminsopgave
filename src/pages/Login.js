@@ -13,14 +13,17 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
-    const { setUser } = useContext(UserContext);
+    const { setAuth } = useContext(UserContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (userLogin) => {
         (async () => {
             try {
-                const { data: user } = await axios.post("http://localhost:4000/auth/token", userLogin)
-                user && setUser(user);
+                const { data: auth } = await axios.post("http://localhost:4000/auth/token", userLogin)
+                setAuth({
+                    token: auth.token,
+                    userID: auth.userId
+                });
                 setTimeout(navigate("/"), 500)
             } catch (err) {
 

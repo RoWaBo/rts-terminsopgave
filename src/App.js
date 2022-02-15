@@ -11,15 +11,8 @@ import { AnimatePresence } from 'framer-motion'
 import { UserContext } from "./contexts/UserContext";
 
 function App() {
-  const { user } = useContext(UserContext);
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const [hideSplashScreen, setHideSplashScreen] = useState(sessionStorage.getItem('hideSplashScreen'));
-
-  useEffect(() => {
-    console.log(user);
-    !user && navigate('/logind')
-  }, [navigate, user]);
 
   return (
     <MainLayout>
