@@ -26,8 +26,38 @@ const UserProvider = ({ children }) => {
         })()
     }, [auth, user]);
 
+    const addUserToActivity = async (activityID) => {
+        console.log('addUserToActivity');
+
+        await axios.post(`http://localhost:4000/api/v1/users/${user.id}/activities/${activityID}`, {}, {
+            headers: { 'Authorization': `Bearer ${auth.token}` }
+        })
+
+        // const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
+        //     headers: { 'Authorization': `Bearer ${auth.token}` }
+        // })
+        // setUser({ ...updatedUser })
+        // console.log('userAPI, :', updatedUser);
+        // console.log('userState, :', user);
+    }
+
+    const removeUserFromActivity = async (activityID) => {
+        console.log('removeUserFromActivity');
+
+        await axios.delete(`http://localhost:4000/api/v1/users/${user.id}/activities/${activityID}`, {
+            headers: { 'Authorization': `Bearer ${auth.token}` }
+        })
+
+        // const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
+        //     headers: { 'Authorization': `Bearer ${auth.token}` }
+        // })
+        // setUser({ ...updatedUser })
+        // console.log('userAPI, :', updatedUser);
+        // console.log('userState, :', user);
+    }
+
     return (
-        <UserContext.Provider value={{ user, setUser, auth, setAuth }}>
+        <UserContext.Provider value={{ user, setUser, auth, setAuth, addUserToActivity, removeUserFromActivity }}>
             {children}
         </UserContext.Provider>
     );

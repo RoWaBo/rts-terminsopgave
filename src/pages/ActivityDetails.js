@@ -10,8 +10,11 @@ import { UserContext } from "../contexts/UserContext";
 
 const ActivityDetails = () => {
     const { id } = useParams()
-    const { user } = useContext(UserContext)
+    const { user, addUserToActivity, removeUserFromActivity } = useContext(UserContext)
     const [activity, setActivity] = useState();
+    const [isSubscribed, setIsSubscribed] = useState();
+    const [userActivities, setUserActivities] = useState();
+    const [errorMessage, setErrorMessage] = useState();
 
     useEffect(() => {
         if (activity) return
@@ -21,8 +24,33 @@ const ActivityDetails = () => {
         })()
     }, [activity, id]);
 
+    useEffect(() => {
+        if (!user) return
+        setUserActivities(user.activities)
+
+        if (userActivities && activity) {
+            userActivities.map(userActivity => userActivity.id === activity.id && setIsSubscribed(true))
+        }
+    }, [userActivities, activity, user]);
+
     const handleClick = () => {
-        console.log('clicked');
+        if (user.age > activity.maxAge || user.age < activity.minAge) {
+            setErrorMessage('Din alder matcher ikke aktiviteten')
+            return
+        }
+
+        if (!isSubscribed) {
+            addUserToActivity(activity.id)
+            setUserActivities([activity, ...userActivities])
+        }
+
+        if (isSubscribed) {
+            removeUserFromActivity(activity.id)
+            const updatedUserActivities = userActivities.filter(userActivity => userActivity.id === activity.id && false)
+            setUserActivities([...updatedUserActivities])
+        }
+
+        setIsSubscribed(!isSubscribed)
     }
 
     // === STYLE ===
@@ -54,7 +82,7 @@ const ActivityDetails = () => {
                     <div css={imgStyle}>
                         {user && (
                             <PrimaryButton
-                                text={"Tilmeld"}
+                                text={isSubscribed ? "Forlad" : "Tilmeld"}
                                 css={btnStyle}
                                 onClick={handleClick}
                             />
@@ -64,6 +92,9 @@ const ActivityDetails = () => {
                         <h2>{activity.name}</h2>
                         <h3 css={descriptionStyle}>{`${activity.minAge}-${activity.maxAge} år`}</h3>
                         <p>{activity.description}</p>
+                        {errorMessage && (
+                            <p>{errorMessage}</p>
+                        )}
                     </div>
                 </article>
             )}

@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Activities from './pages/Activities'
 import Calendar from './pages/Calendar'
 import Search from './pages/Search'
