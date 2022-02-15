@@ -16,6 +16,7 @@ const ActivityDetails = () => {
     const [userActivities, setUserActivities] = useState();
     const [errorMessage, setErrorMessage] = useState();
 
+    // Setting activity if activity is not set
     useEffect(() => {
         if (activity) return
         (async () => {
@@ -24,14 +25,18 @@ const ActivityDetails = () => {
         })()
     }, [activity, id]);
 
+    // Setting userActivities if user is available
     useEffect(() => {
         if (!user) return
         setUserActivities(user.activities)
+    }, [user]);
 
+    // Setting isSubscribed if user activity match current activity
+    useEffect(() => {
         if (userActivities && activity) {
             userActivities.map(userActivity => userActivity.id === activity.id && setIsSubscribed(true))
         }
-    }, [userActivities, activity, user]);
+    }, [userActivities, activity]);
 
     const handleClick = () => {
         if (user.age > activity.maxAge || user.age < activity.minAge) {
@@ -41,13 +46,13 @@ const ActivityDetails = () => {
 
         if (!isSubscribed) {
             addUserToActivity(activity.id)
-            setUserActivities([activity, ...userActivities])
+            // setUserActivities([activity, ...userActivities])
         }
 
         if (isSubscribed) {
             removeUserFromActivity(activity.id)
-            const updatedUserActivities = userActivities.filter(userActivity => userActivity.id === activity.id && false)
-            setUserActivities([...updatedUserActivities])
+            // const updatedUserActivities = userActivities.filter(userActivity => userActivity.id === activity.id && false)
+            // setUserActivities([...updatedUserActivities])
         }
 
         setIsSubscribed(!isSubscribed)
@@ -80,7 +85,7 @@ const ActivityDetails = () => {
             {activity && (
                 <article>
                     <div css={imgStyle}>
-                        {user && (
+                        {user && userActivities && (
                             <PrimaryButton
                                 text={isSubscribed ? "Forlad" : "Tilmeld"}
                                 css={btnStyle}

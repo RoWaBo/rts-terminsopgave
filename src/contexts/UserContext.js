@@ -33,10 +33,10 @@ const UserProvider = ({ children }) => {
             headers: { 'Authorization': `Bearer ${auth.token}` }
         })
 
-        // const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
-        //     headers: { 'Authorization': `Bearer ${auth.token}` }
-        // })
-        // setUser({ ...updatedUser })
+        const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
+            headers: { 'Authorization': `Bearer ${auth.token}` }
+        })
+        setUser({ ...updatedUser })
         // console.log('userAPI, :', updatedUser);
         // console.log('userState, :', user);
     }
@@ -48,10 +48,10 @@ const UserProvider = ({ children }) => {
             headers: { 'Authorization': `Bearer ${auth.token}` }
         })
 
-        // const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
-        //     headers: { 'Authorization': `Bearer ${auth.token}` }
-        // })
-        // setUser({ ...updatedUser })
+        const { data: updatedUser } = await axios(`http://localhost:4000/api/v1/users/${auth.userID}`, {
+            headers: { 'Authorization': `Bearer ${auth.token}` }
+        })
+        setUser({ ...updatedUser })
         // console.log('userAPI, :', updatedUser);
         // console.log('userState, :', user);
     }
