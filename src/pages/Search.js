@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ActivityCard from "../components/ActivityCard";
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
-import { spacing } from "../style/style";
+import { colors, spacing } from "../style/style";
 import MainLayout from "../components/MainLayout";
 import SearchInput from "../components/SearchBar";
 
@@ -34,7 +34,7 @@ const Search = () => {
 
     // === STYLE ===
     const listStyle = css`
-        padding: 0 ${spacing.gutter};
+        padding: 55px ${spacing.gutter};
 
         & > * {
             margin-bottom: 31px;
@@ -42,6 +42,10 @@ const Search = () => {
     `
     const pageHeadingStyle = css`
         padding-bottom: 0;    
+    `
+    const errorMessageStyle = css`
+        padding: 0 ${spacing.gutter};
+        color: ${colors.white};    
     `
 
     return (
@@ -66,8 +70,12 @@ const Search = () => {
                     ))}
                 </ul>
             )}
-            {((search === '' && searchResult) || (searchResult?.length === 0)) && (
-                <p>Der blev ikke fundet nogle aktiviteter. Prøv at søge efter noget andet.</p>
+            {searchResult?.length === 0 && (
+                <p css={errorMessageStyle}>
+                    Der blev ikke fundet nogle aktiviteter.
+                    <br />
+                    Prøv at søge efter noget andet.
+                </p>
             )}
         </MainLayout>
     );
