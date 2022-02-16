@@ -34,8 +34,6 @@ const UserProvider = ({ children }) => {
     }
 
     const addUserToActivity = async (activityID) => {
-        console.log('addUserToActivity');
-
         await axios.post(`http://localhost:4000/api/v1/users/${user.id}/activities/${activityID}`, {}, {
             headers: { 'Authorization': `Bearer ${auth.token}` }
         })
@@ -43,8 +41,6 @@ const UserProvider = ({ children }) => {
     }
 
     const removeUserFromActivity = async (activityID) => {
-        console.log('removeUserFromActivity');
-
         await axios.delete(`http://localhost:4000/api/v1/users/${user.id}/activities/${activityID}`, {
             headers: { 'Authorization': `Bearer ${auth.token}` }
         })
