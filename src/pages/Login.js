@@ -39,7 +39,7 @@ const Login = () => {
     // === STYLE ===
     const backgroundLayer = css`
         position: absolute;
-        top: 0;
+        top: -8px;
         left: 0;
         width: 100vw;
         height: 100vh;
