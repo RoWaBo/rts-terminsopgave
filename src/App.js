@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import { useState } from "react";
 import SplashScreen from "./components/SplashScreen";
 import { AnimatePresence } from 'framer-motion'
+import TeamOverview from "./pages/TeamOverview";
 
 function App() {
   const { pathname } = useLocation();
@@ -21,6 +22,7 @@ function App() {
         <Route path="/logind" element={<Login />}></Route>
         <Route path="/soeg" element={<Search />}></Route>
         <Route path="/kalender" element={<Calendar />}></Route>
+        <Route path="/holdoversigt/:id" element={<TeamOverview />}></Route>
       </Routes>
       {(pathname !== '/logind' && hideSplashScreen) && (
         <Navigation />
