@@ -34,24 +34,22 @@ const Activities = () => {
     return (
         <MainLayout>
             <PageHeader heading="aktiviteter" isFixed />
-            {activities && (
-                <ul css={listStyle}>
-                    {activities.map(({ id, name, minAge, maxAge, asset }, i) => (
-                        <li key={i}>
-                            <Link to={`/aktivitetsdetaljer/${id}`}>
-                                <ActivityCard
-                                    heading={name}
-                                    age={{
-                                        min: minAge,
-                                        max: maxAge
-                                    }}
-                                    imgUrl={asset.url}
-                                />
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <ul css={listStyle}>
+                {activities?.map(({ id, name, minAge, maxAge, asset }) => (
+                    <li key={id}>
+                        <Link to={`/aktivitetsdetaljer/${id}`}>
+                            <ActivityCard
+                                heading={name}
+                                age={{
+                                    min: minAge,
+                                    max: maxAge
+                                }}
+                                imgUrl={asset.url}
+                            />
+                        </Link>
+                    </li>
+                ))}
+            </ul>
         </MainLayout>
     );
 }
