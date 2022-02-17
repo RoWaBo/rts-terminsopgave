@@ -18,7 +18,11 @@ const PrimaryButton = ({ text, ...props }) => {
     `
 
     return (
-        <motion.button css={buttonStyle} {...props}>
+        <motion.button
+            css={buttonStyle}
+            {...props}
+            whileTap={{ scale: 0.95 }}
+        >
             {text}
         </motion.button>
     );
