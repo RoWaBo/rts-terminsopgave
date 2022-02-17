@@ -2,6 +2,7 @@ import { css } from "@emotion/react";
 import { borderRadius, colors } from "../style/style";
 /** @jsxImportSource @emotion/react */
 import { BsExclamationCircle } from 'react-icons/bs';
+import { motion } from "framer-motion";
 
 const ErrorMessage = ({ children, icon, ...props }) => {
 
@@ -27,14 +28,22 @@ const ErrorMessage = ({ children, icon, ...props }) => {
     `
 
     return (
-        <div css={containerStyle} {...props}>
+        <motion.div
+            css={containerStyle}
+            {...props}
+            key={'errorMessage'}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: .5 }}
+        >
             {icon && (
                 <BsExclamationCircle css={iconStyle} />
             )}
             <p css={messageStyle}>
                 {children}
             </p>
-        </div>
+        </motion.div>
     );
 }
 

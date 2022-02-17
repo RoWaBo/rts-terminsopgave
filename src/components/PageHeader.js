@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { motion } from "framer-motion";
 import { colors, fontSize, spacing } from "../style/style";
 /** @jsxImportSource @emotion/react */
 
@@ -26,9 +27,9 @@ const PageHeader = ({ heading, isFixed, ...props }) => {
     `
 
     return (
-        <header css={headerStyle} {...props}>
+        <motion.header css={headerStyle} {...props}>
             <h1 css={headingStyle}>{heading}</h1>
-        </header>
+        </motion.header>
     );
 }
 

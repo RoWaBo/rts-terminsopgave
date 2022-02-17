@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -79,47 +80,52 @@ const Login = () => {
 
     return (
         <SplashScreenBackground>
-            <div css={containerStyle}>
-                {!isloading && (<>
-                    <PageHeader heading="log ind" css={pageHeaderStyle} />
-                    <form onSubmit={handleSubmit(onSubmit)} css={formStyle}>
-                        <input
-                            css={inputStyle}
-                            type="text"
-                            placeholder={'brugernavn'}
-                            {...register("username", {
-                                required: "Skriv et gyldigt brugernavn"
-                            })}
-                        />
-                        <input
-                            css={inputStyle}
-                            type="password"
-                            placeholder="adgangskode"
-                            {...register("password", {
-                                required: "Skriv en gyldig adgangskode",
-                            })}
-                        />
-                        {(errors.username || errors.password) && (
-                            <ErrorMessage icon>
-                                Skriv venligst brugernavn og adgangskode
-                            </ErrorMessage>
-                        )}
-                        {loginErrorMessage && (
-                            <ErrorMessage icon>
-                                {loginErrorMessage}
-                            </ErrorMessage>
-                        )}
-                        <PrimaryButton
-                            css={btnStyle}
-                            text="Log ind"
-                            type="submit"
-                        />
-                    </form>
-                </>)}
+            <motion.div css={containerStyle}>
+                <AnimatePresence>
+                    {!isloading && (<>
+                        <PageHeader heading="log ind" css={pageHeaderStyle} layout />
+                        <motion.form onSubmit={handleSubmit(onSubmit)} css={formStyle} layout>
+                            <motion.input
+                                layout
+                                css={inputStyle}
+                                type="text"
+                                placeholder={'brugernavn'}
+                                {...register("username", {
+                                    required: "Skriv et gyldigt brugernavn"
+                                })}
+                            />
+                            <motion.input
+                                layout
+                                css={inputStyle}
+                                type="password"
+                                placeholder="adgangskode"
+                                {...register("password", {
+                                    required: "Skriv en gyldig adgangskode",
+                                })}
+                            />
+                            {(errors.username || errors.password) && (
+                                <ErrorMessage icon>
+                                    Skriv venligst brugernavn og adgangskode
+                                </ErrorMessage>
+                            )}
+                            {loginErrorMessage && (
+                                <ErrorMessage icon>
+                                    {loginErrorMessage}
+                                </ErrorMessage>
+                            )}
+                            <PrimaryButton
+                                layout
+                                css={btnStyle}
+                                text="Log ind"
+                                type="submit"
+                            />
+                        </motion.form>
+                    </>)}
+                </AnimatePresence>
                 {isloading && (
                     <PageHeader heading="Logger ind..." />
                 )}
-            </div>
+            </motion.div>
             <div css={backgroundLayer}></div>
         </SplashScreenBackground>
     );
