@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { motion } from "framer-motion";
 import { borderRadius, colors, fontSize } from "../style/style";
 /** @jsxImportSource @emotion/react */
 
@@ -26,10 +27,10 @@ const ActivityCard = ({ activityInfo }) => {
     `
 
     return (
-        <section css={sectionStyle}>
+        <motion.section css={sectionStyle} whileTap={{ scale: 0.90 }}>
             <h2 css={headingStyle}>{name}</h2>
             <h3 css={subHeadingStyle}>{`${weekday} ${time}`}</h3>
-        </section>
+        </motion.section>
     );
 }
 

@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { motion } from "framer-motion";
 import { borderRadius, colors, fontSize } from "../style/style";
 /** @jsxImportSource @emotion/react */
 
@@ -26,12 +27,12 @@ const ActivityCard = ({ heading, age, imgUrl }) => {
     `
 
     return (
-        <section css={sectionStyle}>
+        <motion.section css={sectionStyle} whileTap={{ scale: 1.1, y: -20 }}>
             <div css={overlayStyle}>
                 <h2 css={headingStyle}>{heading}</h2>
                 <h3 css={headingStyle}>{`${age.min}-${age.max} år`}</h3>
             </div>
-        </section>
+        </motion.section>
     );
 }
 
