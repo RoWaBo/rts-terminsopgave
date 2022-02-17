@@ -65,6 +65,7 @@ const Login = () => {
         padding: 0 22px;
         border: none;
         margin-bottom: 15px;
+        outline-color: ${colors.pinkTrans};
 
         font-family: 'Ubuntu', sans-serif;
         font-weight: normal;
@@ -90,6 +91,8 @@ const Login = () => {
                                 css={inputStyle}
                                 type="text"
                                 placeholder={'brugernavn'}
+                                onFocus={() => setloginErrorMessage(false)}
+                                whileFocus={{ scale: 1.04 }}
                                 {...register("username", {
                                     required: "Skriv et gyldigt brugernavn"
                                 })}
@@ -99,6 +102,8 @@ const Login = () => {
                                 css={inputStyle}
                                 type="password"
                                 placeholder="adgangskode"
+                                onFocus={() => setloginErrorMessage(false)}
+                                whileFocus={{ scale: 1.04 }}
                                 {...register("password", {
                                     required: "Skriv en gyldig adgangskode",
                                 })}
