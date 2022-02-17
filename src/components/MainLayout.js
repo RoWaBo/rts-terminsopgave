@@ -10,6 +10,7 @@ const MainLayout = ({ children }) => {
         min-height: 100vh;
         background-color: ${colors.purple};
         padding-bottom: 5rem;
+        overflow-x: hidden;
     `
 
     return (

@@ -7,6 +7,7 @@ import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 import { spacing } from "../style/style";
 import MainLayout from "../components/MainLayout";
+import { motion } from "framer-motion";
 
 const Activities = () => {
 
@@ -36,7 +37,19 @@ const Activities = () => {
             <PageHeader heading="aktiviteter" isFixed />
             <ul css={listStyle}>
                 {activities?.map(({ id, name, minAge, maxAge, asset }) => (
-                    <li key={id}>
+                    <motion.li
+                        key={id}
+                        initial={{ opacity: 0, x: '-100vw' }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                            duration: .5,
+                            delay: `0.${id}5`,
+                            type: 'spring',
+                            stiffness: 170,
+                            damping: 15
+                        }}
+                    >
                         <Link to={`/aktivitetsdetaljer/${id}`}>
                             <ActivityCard
                                 heading={name}
@@ -47,7 +60,7 @@ const Activities = () => {
                                 imgUrl={asset.url}
                             />
                         </Link>
-                    </li>
+                    </motion.li>
                 ))}
             </ul>
         </MainLayout>
