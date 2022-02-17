@@ -100,10 +100,14 @@ const Login = () => {
                             })}
                         />
                         {(errors.username || errors.password) && (
-                            <ErrorMessage message="Skriv venligst brugernavn og adgangskode" />
+                            <ErrorMessage icon>
+                                Skriv venligst brugernavn og adgangskode
+                            </ErrorMessage>
                         )}
                         {loginErrorMessage && (
-                            <ErrorMessage message={loginErrorMessage} />
+                            <ErrorMessage icon>
+                                {loginErrorMessage}
+                            </ErrorMessage>
                         )}
                         <PrimaryButton
                             css={btnStyle}

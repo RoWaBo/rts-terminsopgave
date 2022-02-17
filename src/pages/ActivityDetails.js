@@ -6,6 +6,7 @@ import { css } from "@emotion/react";
 import PrimaryButton from "../components/PrimaryButton";
 import { colors, spacing } from "../style/style";
 import { UserContext } from "../contexts/UserContext";
+import ErrorMessage from "../components/ErrorMessage";
 /** @jsxImportSource @emotion/react */
 
 const ActivityDetails = () => {
@@ -84,7 +85,7 @@ const ActivityDetails = () => {
         line-height: 10px;
     `
     const errorMessagetyle = css`
-        padding: 3rem 0 0;
+        margin: 3rem 0 0;
         font-size: 20px;
         text-align: center;
     `
@@ -107,7 +108,9 @@ const ActivityDetails = () => {
                         <h3 css={descriptionStyle}>{`${activity.minAge}-${activity.maxAge} år`}</h3>
                         <p>{activity.description}</p>
                         {errorMessage && (
-                            <p css={errorMessagetyle}>{errorMessage}</p>
+                            <ErrorMessage css={errorMessagetyle}>
+                                {errorMessage}
+                            </ErrorMessage>
                         )}
                     </div>
                 </article>

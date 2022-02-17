@@ -8,6 +8,7 @@ import { css } from "@emotion/react";
 import { colors, spacing } from "../style/style";
 import MainLayout from "../components/MainLayout";
 import SearchInput from "../components/SearchBar";
+import ErrorMessage from "../components/ErrorMessage";
 
 
 const Search = () => {
@@ -51,8 +52,7 @@ const Search = () => {
         padding-bottom: 0;    
     `
     const errorMessageStyle = css`
-        padding: 0 ${spacing.gutter};
-        color: ${colors.white};    
+        margin: 0 ${spacing.gutter};
     `
 
     return (
@@ -76,11 +76,11 @@ const Search = () => {
                 ))}
             </ul>
             {searchResult?.length === 0 && (
-                <p css={errorMessageStyle}>
+                <ErrorMessage icon css={errorMessageStyle}>
                     Der blev ikke fundet nogle aktiviteter.
                     <br />
                     Prøv at søge efter noget andet.
-                </p>
+                </ErrorMessage>
             )}
         </MainLayout>
     );
