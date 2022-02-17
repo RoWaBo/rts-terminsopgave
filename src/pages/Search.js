@@ -5,7 +5,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import ActivityCard from "../components/ActivityCard";
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
-import { colors, spacing } from "../style/style";
+import { spacing } from "../style/style";
 import MainLayout from "../components/MainLayout";
 import SearchInput from "../components/SearchBar";
 import ErrorMessage from "../components/ErrorMessage";
