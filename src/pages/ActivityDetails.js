@@ -7,6 +7,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import { colors, spacing } from "../style/style";
 import { UserContext } from "../contexts/UserContext";
 import ErrorMessage from "../components/ErrorMessage";
+import { motion } from "framer-motion";
 /** @jsxImportSource @emotion/react */
 
 const ActivityDetails = () => {
@@ -94,7 +95,12 @@ const ActivityDetails = () => {
         <MainLayout>
             {activity && (
                 <article>
-                    <div css={imgStyle}>
+                    <motion.div
+                        css={imgStyle}
+                        initial={{ opacity: 0.2, y: '20vh' }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: '20vh' }}
+                    >
                         {userActivities && (
                             <PrimaryButton
                                 text={isSubscribed ? "Forlad" : "Tilmeld"}
@@ -102,8 +108,13 @@ const ActivityDetails = () => {
                                 onClick={handleClick}
                             />
                         )}
-                    </div>
-                    <div css={textContainerStyle}>
+                    </motion.div>
+                    <motion.div css={textContainerStyle}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
                         <h2>{activity.name}</h2>
                         <h3 css={descriptionStyle}>{`${activity.minAge}-${activity.maxAge} år`}</h3>
                         <p>{activity.description}</p>
@@ -112,7 +123,7 @@ const ActivityDetails = () => {
                                 {errorMessage}
                             </ErrorMessage>
                         )}
-                    </div>
+                    </motion.div>
                 </article>
             )}
         </MainLayout>

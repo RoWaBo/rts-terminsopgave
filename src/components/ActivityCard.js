@@ -27,7 +27,7 @@ const ActivityCard = ({ heading, age, imgUrl }) => {
     `
 
     return (
-        <motion.section css={sectionStyle} whileTap={{ scale: 1.1, y: -20 }}>
+        <motion.section css={sectionStyle} whileTap={{ scale: 1.1, y: '-8vh', opacity: 0.7 }}>
             <div css={overlayStyle}>
                 <h2 css={headingStyle}>{heading}</h2>
                 <h3 css={headingStyle}>{`${age.min}-${age.max} år`}</h3>
