@@ -106,6 +106,16 @@ const ActivityDetails = () => {
                                 text={isSubscribed ? "Forlad" : "Tilmeld"}
                                 css={btnStyle}
                                 onClick={handleClick}
+                                animate={errorMessage && ({
+                                    y: ['0vh', '3vh', '-100vh'],
+                                    rotate: [0, 180],
+                                    transition: {
+                                        duration: 1.5,
+                                        type: 'spring',
+                                        stifness: 500,
+                                        ease: 'easeIn'
+                                    }
+                                })}
                             />
                         )}
                     </motion.div>
