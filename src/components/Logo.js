@@ -17,8 +17,12 @@ const Logo = () => {
     const topTextStyle = css`
         font-family: 'Roboto', sans-serif;
         font-size: ${fontSize.l};
-        /* -webkit-text-fill-color: transparent;
-        -webkit-text-stroke: 4px #431567; */
+        color: rgba(0, 0, 0, 0) !important;
+        text-shadow:
+            -1px -1px 0 #431567,  
+            1px -1px 0 #431567,
+            -1px 1px 0 #431567,
+            1px 1px 0 #431567;
     `
     const bottomTextStyle = css`
         font-family: 'Racing Sans One', cursive;
