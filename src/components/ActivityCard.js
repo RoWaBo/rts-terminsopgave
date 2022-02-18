@@ -28,12 +28,26 @@ const ActivityCard = (props) => {
         font-weight: 500;
     `
 
+    // === ANIMATIONS ===
+    const sectionMotion = {
+        whileTap: {
+            scale: 1.2,
+            y: '-10vh',
+            opacity: 0.5
+        }
+    }
+    const overlayMotion = {
+        whileTap: {
+            opacity: 0
+        }
+    }
+
     return (
-        <motion.section css={sectionStyle} whileTap={{ scale: 1.1, y: '-8vh', opacity: 0.7 }}>
-            <div css={overlayStyle}>
+        <motion.section css={sectionStyle} whileTap={'whileTap'} variants={sectionMotion}>
+            <motion.div css={overlayStyle} variants={overlayMotion}>
                 <h2 css={headingStyle}>{name}</h2>
                 <h3 css={headingStyle}>{`${minAge}-${maxAge} år`}</h3>
-            </div>
+            </motion.div>
         </motion.section>
     );
 }
