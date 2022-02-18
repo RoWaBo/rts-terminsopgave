@@ -40,7 +40,7 @@ const Login = () => {
     // === STYLE ===
     const backgroundLayer = css`
         position: absolute;
-        top: -8px;
+        top: -12px;
         left: 0;
         width: 100vw;
         height: 100vh;
@@ -81,7 +81,12 @@ const Login = () => {
 
     return (
         <SplashScreenBackground>
-            <motion.div css={containerStyle}>
+            <motion.div
+                css={containerStyle}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1, transition: { delay: .7, duration: .5 } }}
+                exit={{ opacity: 0 }}
+            >
                 <AnimatePresence>
                     {!isloading && (<>
                         <PageHeader heading="log ind" css={pageHeaderStyle} layout />
@@ -92,7 +97,7 @@ const Login = () => {
                                 type="text"
                                 placeholder={'brugernavn'}
                                 onFocus={() => setloginErrorMessage(false)}
-                                whileFocus={{ scale: 1.04 }}
+                                whileFocus={{ scale: 1.02 }}
                                 {...register("username", {
                                     required: "Skriv et gyldigt brugernavn"
                                 })}
@@ -103,19 +108,14 @@ const Login = () => {
                                 type="password"
                                 placeholder="adgangskode"
                                 onFocus={() => setloginErrorMessage(false)}
-                                whileFocus={{ scale: 1.04 }}
+                                whileFocus={{ scale: 1.02 }}
                                 {...register("password", {
                                     required: "Skriv en gyldig adgangskode",
                                 })}
                             />
-                            {(errors.username || errors.password) && (
+                            {(errors.username || errors.password || loginErrorMessage) && (
                                 <ErrorMessage icon>
-                                    Skriv venligst brugernavn og adgangskode
-                                </ErrorMessage>
-                            )}
-                            {loginErrorMessage && (
-                                <ErrorMessage icon>
-                                    {loginErrorMessage}
+                                    {loginErrorMessage ? loginErrorMessage : 'Skriv venligst brugernavn og adgangskode'}
                                 </ErrorMessage>
                             )}
                             <PrimaryButton
@@ -128,10 +128,20 @@ const Login = () => {
                     </>)}
                 </AnimatePresence>
                 {isloading && (
-                    <PageHeader heading="Logger ind..." />
+                    <PageHeader heading="Logger ind..."
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1, transition: { delay: 0.2 } }}
+                        exit={{ opacity: 0 }}
+                    />
                 )}
             </motion.div>
-            <div css={backgroundLayer}></div>
+            <motion.div
+                css={backgroundLayer}
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: '100%', opacity: 1 }}
+                exit={{ width: 0, opacity: 0 }}
+                transition={{ duration: .9 }}
+            />
         </SplashScreenBackground>
     );
 }

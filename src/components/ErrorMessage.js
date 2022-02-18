@@ -12,7 +12,7 @@ const ErrorMessage = ({ children, icon, ...props }) => {
         ${!icon && 'text-align: center;'};
     `
     const containerStyle = css`
-        background: rgb(239 68 68 / 55%);
+        background: rgb(239 68 68 / 60%);
         border-radius: ${borderRadius.s};
         padding: .5rem 1rem;
         ${icon && (`

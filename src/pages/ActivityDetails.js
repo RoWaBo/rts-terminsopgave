@@ -97,9 +97,9 @@ const ActivityDetails = () => {
                 <article>
                     <motion.div
                         css={imgStyle}
-                        initial={{ opacity: 0.2, y: '20vh' }}
+                        initial={{ opacity: 0.2, y: '7vh' }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: '20vh' }}
+                        exit={{ opacity: 0, y: '7vh' }}
                     >
                         {userActivities && (
                             <PrimaryButton
