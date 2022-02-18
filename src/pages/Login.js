@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ const Login = () => {
     // === STYLE ===
     const backgroundLayer = css`
         position: absolute;
-        top: 0;
+        top: -12px;
         left: 0;
         width: 100vw;
         height: 100vh;
@@ -64,6 +65,7 @@ const Login = () => {
         padding: 0 22px;
         border: none;
         margin-bottom: 15px;
+        outline-color: ${colors.pinkTrans};
 
         font-family: 'Ubuntu', sans-serif;
         font-weight: normal;
@@ -79,44 +81,67 @@ const Login = () => {
 
     return (
         <SplashScreenBackground>
-            <div css={containerStyle}>
-                {!isloading && (<>
-                    <PageHeader heading="log ind" css={pageHeaderStyle} />
-                    <form onSubmit={handleSubmit(onSubmit)} css={formStyle}>
-                        <input
-                            css={inputStyle}
-                            type="text"
-                            placeholder={'brugernavn'}
-                            {...register("username", {
-                                required: "Skriv et gyldigt brugernavn"
-                            })}
-                        />
-                        <input
-                            css={inputStyle}
-                            type="password"
-                            placeholder="adgangskode"
-                            {...register("password", {
-                                required: "Skriv en gyldig adgangskode",
-                            })}
-                        />
-                        {(errors.username || errors.password) && (
-                            <ErrorMessage message="Skriv venligst brugernavn og adgangskode" />
-                        )}
-                        {loginErrorMessage && (
-                            <ErrorMessage message={loginErrorMessage} />
-                        )}
-                        <PrimaryButton
-                            css={btnStyle}
-                            text="Log ind"
-                            type="submit"
-                        />
-                    </form>
-                </>)}
+            <motion.div
+                css={containerStyle}
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1, transition: { delay: .7, duration: .5 } }}
+                exit={{ opacity: 0 }}
+            >
+                <AnimatePresence>
+                    {!isloading && (<>
+                        <PageHeader heading="log ind" css={pageHeaderStyle} layout />
+                        <motion.form onSubmit={handleSubmit(onSubmit)} css={formStyle} layout>
+                            <motion.input
+                                layout
+                                css={inputStyle}
+                                type="text"
+                                placeholder={'brugernavn'}
+                                onFocus={() => setloginErrorMessage(false)}
+                                whileFocus={{ scale: 1.02 }}
+                                {...register("username", {
+                                    required: "Skriv et gyldigt brugernavn"
+                                })}
+                            />
+                            <motion.input
+                                layout
+                                css={inputStyle}
+                                type="password"
+                                placeholder="adgangskode"
+                                onFocus={() => setloginErrorMessage(false)}
+                                whileFocus={{ scale: 1.02 }}
+                                {...register("password", {
+                                    required: "Skriv en gyldig adgangskode",
+                                })}
+                            />
+                            {(errors.username || errors.password || loginErrorMessage) && (
+                                <ErrorMessage icon>
+                                    {loginErrorMessage ? loginErrorMessage : 'Skriv venligst brugernavn og adgangskode'}
+                                </ErrorMessage>
+                            )}
+                            <PrimaryButton
+                                layout
+                                css={btnStyle}
+                                text="Log ind"
+                                type="submit"
+                            />
+                        </motion.form>
+                    </>)}
+                </AnimatePresence>
                 {isloading && (
-                    <PageHeader heading="Logger ind..." />
+                    <PageHeader heading="Logger ind..."
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1, transition: { delay: 0.2 } }}
+                        exit={{ opacity: 0 }}
+                    />
                 )}
-            </div>
-            <div css={backgroundLayer}></div>
+            </motion.div>
+            <motion.div
+                css={backgroundLayer}
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ width: '100%', opacity: 1 }}
+                exit={{ width: 0, opacity: 0 }}
+                transition={{ duration: .9 }}
+            />
         </SplashScreenBackground>
     );
 }

@@ -3,6 +3,7 @@ import { FiHome, FiSearch, FiCalendar } from 'react-icons/fi'
 import { css } from "@emotion/react";
 /** @jsxImportSource @emotion/react */
 import { colors, shadow, spacing } from '../style/style'
+import { motion } from "framer-motion";
 
 const Navigation = () => {
 
@@ -46,11 +47,11 @@ const Navigation = () => {
         <nav css={navStyle}>
             <ul css={ulStyle}>
                 {navItems.map((item, i) => (
-                    <li key={i} css={liStyle}>
+                    <motion.li key={i} css={liStyle} whileTap={{ scale: 0.95 }}>
                         <Link to={item.href} css={linkStyle}>
                             {item.icon}
                         </Link>
-                    </li>
+                    </motion.li>
                 ))}
             </ul>
         </nav>

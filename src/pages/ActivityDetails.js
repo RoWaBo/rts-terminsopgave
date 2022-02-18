@@ -6,6 +6,8 @@ import { css } from "@emotion/react";
 import PrimaryButton from "../components/PrimaryButton";
 import { colors, spacing } from "../style/style";
 import { UserContext } from "../contexts/UserContext";
+import ErrorMessage from "../components/ErrorMessage";
+import { motion } from "framer-motion";
 /** @jsxImportSource @emotion/react */
 
 const ActivityDetails = () => {
@@ -84,7 +86,7 @@ const ActivityDetails = () => {
         line-height: 10px;
     `
     const errorMessagetyle = css`
-        padding: 3rem 0 0;
+        margin: 3rem 0 0;
         font-size: 20px;
         text-align: center;
     `
@@ -93,23 +95,45 @@ const ActivityDetails = () => {
         <MainLayout>
             {activity && (
                 <article>
-                    <div css={imgStyle}>
+                    <motion.div
+                        css={imgStyle}
+                        initial={{ opacity: 0.2, y: '7vh' }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: '7vh' }}
+                    >
                         {userActivities && (
                             <PrimaryButton
                                 text={isSubscribed ? "Forlad" : "Tilmeld"}
                                 css={btnStyle}
                                 onClick={handleClick}
+                                animate={errorMessage && ({
+                                    y: ['0vh', '3vh', '-100vh'],
+                                    rotate: [0, 180],
+                                    transition: {
+                                        duration: 1.5,
+                                        type: 'spring',
+                                        stifness: 500,
+                                        ease: 'easeIn'
+                                    }
+                                })}
                             />
                         )}
-                    </div>
-                    <div css={textContainerStyle}>
+                    </motion.div>
+                    <motion.div css={textContainerStyle}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
                         <h2>{activity.name}</h2>
                         <h3 css={descriptionStyle}>{`${activity.minAge}-${activity.maxAge} år`}</h3>
                         <p>{activity.description}</p>
                         {errorMessage && (
-                            <p css={errorMessagetyle}>{errorMessage}</p>
+                            <ErrorMessage css={errorMessagetyle}>
+                                {errorMessage}
+                            </ErrorMessage>
                         )}
-                    </div>
+                    </motion.div>
                 </article>
             )}
         </MainLayout>

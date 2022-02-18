@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import { borderRadius, shadow, colors, spacing, fontSize } from "../style/style";
 /** @jsxImportSource @emotion/react */
+import { motion } from "framer-motion";
 
 const PrimaryButton = ({ text, ...props }) => {
 
@@ -17,9 +18,13 @@ const PrimaryButton = ({ text, ...props }) => {
     `
 
     return (
-        <button css={buttonStyle} {...props}>
+        <motion.button
+            css={buttonStyle}
+            {...props}
+            whileTap={{ scale: 0.95 }}
+        >
             {text}
-        </button>
+        </motion.button>
     );
 }
 
