@@ -60,17 +60,10 @@ const Search = () => {
             <PageHeader heading="Søg" css={pageHeadingStyle} />
             <SearchInput inputValue={search} inputOnChangeFcn={setSearch} setSearchParam={setSearchParams} />
             <ul css={listStyle}>
-                {search !== '' && searchResult?.map(({ id, name, minAge, maxAge, asset }, i) => (
+                {search !== '' && searchResult?.map((activity, i) => (
                     <li key={i}>
-                        <Link to={`/aktivitetsdetaljer/${id}`}>
-                            <ActivityCard
-                                heading={name}
-                                age={{
-                                    min: minAge,
-                                    max: maxAge
-                                }}
-                                imgUrl={asset.url}
-                            />
+                        <Link to={`/aktivitetsdetaljer/${activity.id}`}>
+                            <ActivityCard activityInfo={activity} />
                         </Link>
                     </li>
                 ))}

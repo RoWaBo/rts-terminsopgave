@@ -36,29 +36,22 @@ const Activities = () => {
         <MainLayout>
             <PageHeader heading="aktiviteter" isFixed />
             <ul css={listStyle}>
-                {activities?.map(({ id, name, minAge, maxAge, asset }) => (
+                {activities?.map((activity) => (
                     <motion.li
-                        key={id}
+                        key={activity.id}
                         initial={{ opacity: 0, x: '-100vw' }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0 }}
                         transition={{
                             duration: .5,
-                            delay: `0.${id}5`,
+                            delay: `0.${activity.id}5`,
                             type: 'spring',
                             stiffness: 170,
                             damping: 15
                         }}
                     >
-                        <Link to={`/aktivitetsdetaljer/${id}`}>
-                            <ActivityCard
-                                heading={name}
-                                age={{
-                                    min: minAge,
-                                    max: maxAge
-                                }}
-                                imgUrl={asset.url}
-                            />
+                        <Link to={`/aktivitetsdetaljer/${activity.id}`}>
+                            <ActivityCard activityInfo={activity} />
                         </Link>
                     </motion.li>
                 ))}
