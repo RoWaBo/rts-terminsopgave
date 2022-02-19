@@ -9,6 +9,7 @@ import { spacing } from "../style/style";
 import MainLayout from "../components/MainLayout";
 import SearchInput from "../components/SearchBar";
 import ErrorMessage from "../components/ErrorMessage";
+import { AnimatePresence, motion } from "framer-motion";
 
 
 const Search = () => {
@@ -55,25 +56,42 @@ const Search = () => {
         margin: 0 ${spacing.gutter};
     `
 
+    // === ANIMATIONS ===
+    const listItemMotion = {
+        initial: {
+            opacity: 0,
+            y: -50
+        },
+        animate: {
+            opacity: 1,
+            y: 0
+        },
+        exit: {
+            opacity: 0,
+            transition: { duration: .2 }
+        }
+    }
+
     return (
         <MainLayout>
             <PageHeader heading="Søg" css={pageHeadingStyle} />
             <SearchInput inputValue={search} inputOnChangeFcn={setSearch} setSearchParam={setSearchParams} />
             <ul css={listStyle}>
-                {search !== '' && searchResult?.map(({ id, name, minAge, maxAge, asset }, i) => (
-                    <li key={i}>
-                        <Link to={`/aktivitetsdetaljer/${id}`}>
-                            <ActivityCard
-                                heading={name}
-                                age={{
-                                    min: minAge,
-                                    max: maxAge
-                                }}
-                                imgUrl={asset.url}
-                            />
-                        </Link>
-                    </li>
-                ))}
+                <AnimatePresence>
+                    {search !== '' && searchResult?.map((activity, i) => (
+                        <motion.li
+                            key={i}
+                            variants={listItemMotion}
+                            initial='initial'
+                            animate='animate'
+                            exit='exit'
+                        >
+                            <Link to={`/aktivitetsdetaljer/${activity.id}`}>
+                                <ActivityCard activityInfo={activity} />
+                            </Link>
+                        </motion.li>
+                    ))}
+                </AnimatePresence>
             </ul>
             {searchResult?.length === 0 && (
                 <ErrorMessage icon css={errorMessageStyle}>

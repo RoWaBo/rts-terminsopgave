@@ -25,9 +25,30 @@ const ActivityCard = ({ activityInfo }) => {
         text-transform: capitalize;
         line-height: 21px;
     `
+    // === ANIMATIONS ===
+    const sectionMotion = {
+        initial: {
+            scale: .9,
+            y: 20,
+            opacity: 0,
+            borderRadius: '50%'
+        },
+        animate: {
+            scale: 1,
+            y: 0,
+            opacity: 1,
+            borderRadius: '10px',
+            transition: { duration: .6 }
+        }
+    }
 
     return (
-        <motion.section css={sectionStyle} whileTap={{ scale: 0.90 }}>
+        <motion.section css={sectionStyle}
+            whileTap={{ scale: 0.90 }}
+            variants={sectionMotion}
+            initial='initial'
+            animate='animate'
+        >
             <h2 css={headingStyle}>{name}</h2>
             <h3 css={subHeadingStyle}>{`${weekday} ${time}`}</h3>
         </motion.section>

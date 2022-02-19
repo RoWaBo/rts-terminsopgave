@@ -66,10 +66,11 @@ const ActivityDetails = () => {
 
     // === STYLE ===
     const imgStyle = css`
-        width: 100%;
-        height: 489px;
+        width: 100vw;
+        height: 59vh;
         background-image: url(${activity?.asset.url});
         background-size: cover;
+        background-position: center;
         position: relative;
     `
     const btnStyle = css`
