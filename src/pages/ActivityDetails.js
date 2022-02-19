@@ -70,6 +70,7 @@ const ActivityDetails = () => {
         height: 59vh;
         background-image: url(${activity?.asset.url});
         background-size: cover;
+        background-position: center;
         position: relative;
     `
     const btnStyle = css`

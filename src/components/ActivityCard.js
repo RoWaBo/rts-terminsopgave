@@ -13,6 +13,7 @@ const ActivityCard = (props) => {
         border-radius: ${borderRadius.l} ${borderRadius.l} 0 ${borderRadius.l};
         background-image: url(${asset.url});
         background-size: cover;
+        background-position: center;
         position: relative;
     `
     const overlayStyle = css`
@@ -33,7 +34,8 @@ const ActivityCard = (props) => {
         whileTap: {
             scale: 1.2,
             y: '-10vh',
-            opacity: 0.5
+            opacity: 0.5,
+            borderRadius: '0px'
         }
     }
     const overlayMotion = {
