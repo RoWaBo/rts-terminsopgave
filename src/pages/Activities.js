@@ -35,7 +35,7 @@ const Activities = () => {
 
 	return (
 		<MainLayout>
-			<PageHeader heading="aktiviteter test" isFixed />
+			<PageHeader heading="aktiviteter" isFixed />
 			<ul css={listStyle}>
 				{activities?.map(activity => (
 					<motion.li
